@@ -1,7 +1,6 @@
 package com.example.testapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -14,8 +13,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -40,7 +42,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WeatherScreen(viewModel: WeatherViewModel) {
     val weather by viewModel.weather
-    Log.d("WeatherScreen", "Current weather: $weather")
+    val city = remember{mutableStateOf("")}
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,7 +50,9 @@ fun WeatherScreen(viewModel: WeatherViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Button(onClick = { viewModel.fetchWeather("London") }) {
+        TextField(value = city.value, onValueChange = { newText -> city.value = newText},  )
+
+        Button(onClick = { viewModel.fetchWeather(city.value) }) {
             Text(text = "Get Weather")
         }
 
@@ -56,8 +60,8 @@ fun WeatherScreen(viewModel: WeatherViewModel) {
 
         weather?.let {
             Text(text = "City: ${it.name}")
-            Text(text = "Temperature: ${it.main.temp}")
-            Text(text = "Feels Like: ${it.main.feels_like}")
+            Text(text = "Temperature: ${it.main.temp.toInt()}°C")
+            Text(text = "Feels Like: ${it.main.feels_like.toInt()}°C")
         }
     }
 }
