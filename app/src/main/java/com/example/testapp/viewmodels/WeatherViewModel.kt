@@ -32,4 +32,26 @@ class WeatherViewModel : ViewModel() {
             }
         }
     }
+
+
+    fun fetchWeatherByCoords(longitude: String, latitude: String) {
+
+        viewModelScope.launch {
+
+            try {
+
+                val response = RetrofitInstance.api.getWeatherByCoords(
+                    longitude = longitude,
+                    latitude = latitude,
+                    apiKey,
+                    units
+                )
+
+                _weather.value = response
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 }
