@@ -60,7 +60,7 @@ fun BottomBarNavigation(
                 )
             }
             composable(BottomBarRoutes.COORDS.routes) {
-                LocationScreen(viewModel = weatherViewModel ,navHostController = navHostController)
+                LocationScreen(viewModel = weatherViewModel ,navHostController = navHostController, context)
             }
             composable(BottomBarRoutes.SOME.routes) {
                 ProfileScreen(navHostController = navHostController)

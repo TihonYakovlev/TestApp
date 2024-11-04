@@ -21,7 +21,7 @@ fun ProfileScreen(
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(
-            text = "Profile Screen", style = TextStyle(
+            text = "HZ che za ekran", style = TextStyle(
                 color = Color.Black,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 30.sp

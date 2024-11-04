@@ -1,16 +1,19 @@
 package com.example.testapp.presentation.screens
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -40,15 +43,26 @@ fun WeatherScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        horizontalAlignment = Alignment.End
+        //  horizontalAlignment = Alignment.End
     ) {
-        Box(contentAlignment = Alignment.Center) {
+        Row(modifier = Modifier.fillMaxWidth()) {
             IconButton(onClick = {
                 navHostController.navigate(ScreenRoutes.Detail.route)
             }) {
                 Icon(
                     Icons.Filled.Settings,
                     contentDescription = "Details", modifier = Modifier.size(80.dp),
+                )
+            }
+
+            Spacer(Modifier.weight(1f))
+
+            IconButton(onClick = {
+                Toast.makeText(context, "Enter a city name on english", Toast.LENGTH_LONG).show()
+            }) {
+                Icon(
+                    Icons.Filled.Info,
+                    contentDescription = "Info", modifier = Modifier.size(80.dp),
                 )
             }
         }
@@ -63,7 +77,7 @@ fun WeatherScreen(
                 onValueChange = { newText -> city.value = newText },
                 singleLine = true,
                 label = { Text(text = "City", color = Color.LightGray) },
-                )
+            )
             Spacer(modifier = Modifier.height(20.dp))
 
 
